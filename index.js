@@ -54,7 +54,7 @@ async function main() {
         expires: '01-01-2099'
       }
       await bucket
-        .file(filename)
+        .file(file)
         .getSignedUrl(options)
         .then(url => {
           core.setOutput('url', url[0])
