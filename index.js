@@ -55,16 +55,16 @@ async function main() {
             action: 'read',
             expires: '01-01-2099'
           }
-          await bucket.file(file).makePublic()
-          // await bucket
-          //   .file(file)
-          //   .getSignedUrl(options)
-          //   .then(url => {
-          //     core.setOutput('url', url)
-          //   })
-          //   .catch(error => {
-          //     throw new Error(error)
-          //   })
+          await bucket.file(destination).makePublic()
+          await bucket
+            .file(destination)
+            .getSignedUrl(options)
+            .then(url => {
+              core.setOutput('url', url)
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
         }
       })
       .catch(error => {
