@@ -14,7 +14,7 @@ async function main() {
     let file = core.getInput('file')
     let destination = core.getInput('destination')
     let serviceAccountCert = core.getInput('service_account_cert')
-    let storageBucket = core.getInput('storage_bucket')
+    let storageBucket = 'antamina-filter-clogging-preve.appspot.com'
     let get_download_url = core.getBooleanInput('get_download_url')
 
     if (!file) {
