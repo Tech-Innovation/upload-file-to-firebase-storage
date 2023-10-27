@@ -1,21 +1,29 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: upload-file-to-firebase-storage
+description: Upload file to firebase storage
+author: Tech Innovation SAC
 
-# Define your inputs here.
 inputs:
-  who-to-greet:
-    description: 'Your input description here'
+  file:
+    description: 'File to upload'
     required: true
-    default: 'World'
+  destination:
+    description: 'Destination path'
+    required: true
+  service_account_cert: 
+    description: 'Service account cert'
+    required: true
+  storage_bucket:
+    description: 'Storage bucket'
+    required: true
+  get_download_url: 
+    description: 'Get download url'
+    required: false
+    default: false
 
-# Define your outputs here.
 outputs:
-  greeting:
-    description: 'Your output description here'
+  url:
+    description: 'Firebase Storage file url'
 
 runs:
-  using: docker
-  image: Dockerfile
-  env:
-    INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+  using: node18
+  main: index.js
