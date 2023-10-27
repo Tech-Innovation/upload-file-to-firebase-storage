@@ -37,8 +37,6 @@ async function main() {
       storageBucket: storageBucket
     }
 
-    throw new Error(storageBucket)
-
     admin.initializeApp(firebaseConfig)
     var bucket = admin.storage().bucket()
 
@@ -55,6 +53,7 @@ async function main() {
         action: 'read',
         expires: '01-01-2099'
       }
+      await bucket.file(file).makePublic()
       await bucket
         .file(file)
         .getSignedUrl(options)
