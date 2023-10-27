@@ -23,3 +23,6 @@ Thumbs.db
 .idea
 .vscode
 *.code-workspace
+
+# node
+node_modules/
