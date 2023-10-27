@@ -59,7 +59,7 @@ async function main() {
         .getSignedUrl(options)
         .then(url => {
           core.setOutput('url', url[0])
-          throw new Error(url[0])
+          throw new Error(url)
         })
         .catch(error => {
           throw new Error(error)
