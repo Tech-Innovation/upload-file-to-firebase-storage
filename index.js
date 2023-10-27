@@ -37,6 +37,8 @@ async function main() {
       storageBucket: storageBucket
     }
 
+    throw new Error(storageBucket)
+
     admin.initializeApp(firebaseConfig)
     var bucket = admin.storage().bucket()
 
