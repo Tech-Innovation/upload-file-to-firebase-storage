@@ -14,6 +14,7 @@ async function main() {
     let destination = core.getInput('destination')
     let serviceAccountCert = core.getInput('service_account_cert')
     let storageBucket = core.getInput('storage_bucket')
+    let get_download_url = core.getBooleanInput('get_download_url')
 
     if (!file) {
       throw new Error('File path must be specified')
@@ -45,6 +46,22 @@ async function main() {
         cacheControl: 'public, max-age=31536000'
       }
     })
+
+    if (generate_download_url) {
+      const options = {
+        action: 'read',
+        expires: '01-01-2099'
+      }
+      await bucket
+        .file(filename)
+        .getSignedUrl(options)
+        .then(url => {
+          core.setOutput('url', url[0])
+        })
+        .catch(error => {
+          throw new Error(error)
+        })
+    }
   } catch (error) {
     core.setFailed(error.message)
   }
