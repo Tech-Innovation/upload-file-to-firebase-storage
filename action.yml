@@ -25,5 +25,5 @@ outputs:
     description: 'Firebase Storage file url'
 
 runs:
-  using: node18
+  using: node20
   main: index.js
