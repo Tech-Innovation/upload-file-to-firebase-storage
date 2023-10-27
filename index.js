@@ -48,7 +48,7 @@ async function main() {
       }
     })
 
-    if (generate_download_url) {
+    if (get_download_url) {
       const options = {
         action: 'read',
         expires: '01-01-2099'
