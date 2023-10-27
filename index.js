@@ -40,30 +40,36 @@ async function main() {
     admin.initializeApp(firebaseConfig)
     var bucket = admin.storage().bucket()
 
-    await bucket.upload(file, {
-      gzip: true,
-      destination: destination,
-      metadata: {
-        cacheControl: 'public, max-age=31536000'
-      }
-    })
-
-    if (get_download_url) {
-      const options = {
-        action: 'read',
-        expires: '01-01-2099'
-      }
-      await bucket.file(file).makePublic()
-      await bucket
-        .file(file)
-        .getSignedUrl(options)
-        .then(url => {
-          core.setOutput('url', url)
-        })
-        .catch(error => {
-          throw new Error(error)
-        })
-    }
+    await bucket
+      .upload(file, {
+        gzip: true,
+        destination: destination,
+        metadata: {
+          cacheControl: 'public, max-age=31536000'
+        }
+      })
+      .then(async () => {
+        console.log(`${file} uploaded to ${destination}.`)
+        if (get_download_url) {
+          const options = {
+            action: 'read',
+            expires: '01-01-2099'
+          }
+          await bucket.file(file).makePublic()
+          await bucket
+            .file(file)
+            .getSignedUrl(options)
+            .then(url => {
+              core.setOutput('url', url)
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
+        }
+      })
+      .catch(error => {
+        throw new Error(error)
+      })
   } catch (error) {
     core.setFailed(error.message)
   }
