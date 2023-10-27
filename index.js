@@ -1,3 +1,4 @@
+const admin = require('firebase-admin')
 const core = require('@actions/core')
 
 function stringToJson(str) {
