@@ -58,8 +58,7 @@ async function main() {
         .file(file)
         .getSignedUrl(options)
         .then(url => {
-          core.setOutput('url', url[0])
-          throw new Error(url)
+          core.setOutput('url', url)
         })
         .catch(error => {
           throw new Error(error)
